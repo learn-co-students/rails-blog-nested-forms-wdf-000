@@ -18,18 +18,18 @@
  </div>
 
 
- <div class="field">
- <span>Tags:</span>
- <%= f.fields_for(:tags, @post.tags.build) do |tag_form| %>
-
-   <%= tag_form.label :name, value: 'Name' %>
-   <%= tag_form.text_field :name  %>
- <% end %>
-</div>
-
   <div class="field">
     <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
   </div>
+
+  <div class="field">
+  <span>Tags:</span>
+  <%= f.fields_for(:tags, @post.tags.build) do |tag_form| %>
+
+    <%= tag_form.label :name, id: 'Name' %>
+    <%= tag_form.text_field :name  %>
+  <% end %>
+ </div>
 
   <div class="actions">
     <%= f.submit %>
