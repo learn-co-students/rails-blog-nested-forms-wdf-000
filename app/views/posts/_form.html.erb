@@ -20,7 +20,11 @@
   </div>
 
   <div class="field">
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+    <%= f.fields_for :tags, @post.tags.build do |tag| %>
+      New tag: <%= tag.text_field :name, id: 'Name' %>
+      <% end %>
+    <br>
   </div>
 
   <div class="actions">
