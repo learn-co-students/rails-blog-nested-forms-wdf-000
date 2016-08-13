@@ -1,3 +1,5 @@
+*.swp
+*.log
 db/developmet.sqlite3
 db/test.sqlite3
 log
