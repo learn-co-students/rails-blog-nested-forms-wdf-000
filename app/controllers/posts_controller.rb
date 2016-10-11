@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find_by_id(params[:id])
   end
 
   # GET /posts/new
@@ -25,6 +26,12 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    if params["tag"]["name"].present?
+      @tag = Tag.find_or_create_by(params["tag"]["name"])
+      @Post.tags << @tag
+      @tag.posts << @post
+    end
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
