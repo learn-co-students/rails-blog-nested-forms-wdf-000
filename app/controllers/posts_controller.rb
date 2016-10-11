@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @tag = Tag.new
   end
 
   # GET /posts/1/edit
@@ -25,6 +26,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    if params[:tag][:name].present?
+    @tag = Tag.find_or_create_by(params[:tag][:name])
+    @post.tags << @tag
+    @tag.posts << @post
+    end
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
