@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   end
 
   # DELETE /posts/1
-  # DELETE /posts/1.json
+  # DELETE /posts/1.jso
   def destroy
     @post.destroy
     respond_to do |format|
@@ -68,6 +68,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :content, :tag_ids => [])
+      params.require(:post).permit(:name, :content, :tag_ids => [], tags_attributes: [:name])
     end
 end
